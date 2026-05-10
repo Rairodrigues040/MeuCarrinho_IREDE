@@ -26,6 +26,9 @@ fun Header(
     title: String,
     modifier: Modifier = Modifier
 ){
+    //Arrangement -> disposição dos elementos
+    //Row -> disposição é na horizontal
+    //column -> disposição é na vertical
     Row(
         modifier = modifier.fillMaxSize(),
         horizontalArrangement = Arrangement.Center,
