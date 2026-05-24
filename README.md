@@ -11,7 +11,7 @@ O projeto permite adicionar itens ao carrinho, organizar por categorias, control
 ## Tela Principal
 
 <p align="center">
-  <img src="images/home.png" width="300"/>
+  <img width="374" height="772" alt="Captura de tela 2026-05-24 163111" src="https://github.com/user-attachments/assets/72f8d2d2-1c72-4c56-8c90-b488426becb9" />
 </p>
 
 ---
@@ -19,7 +19,7 @@ O projeto permite adicionar itens ao carrinho, organizar por categorias, control
 ## Tela de Adicionar Item
 
 <p align="center">
-  <img src="images/add_item.png" width="300"/>
+  <img width="364" height="769" alt="Captura de tela 2026-05-24 163130" src="https://github.com/user-attachments/assets/0a9bf8da-5609-431f-bdac-aabfa1d8135a" />
 </p>
 
 ---
@@ -182,4 +182,4 @@ O projeto foi desenvolvido com foco em:
 
 # 👨‍💻 Autor
 
-Desenvolvido por **Raí Rodrigues**.
+Desenvolvido por **Raí Rodrigues** em aula com o **IREDE**.
