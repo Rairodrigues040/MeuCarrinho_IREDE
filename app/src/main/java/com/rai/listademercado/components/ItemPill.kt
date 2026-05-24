@@ -30,11 +30,6 @@ import androidx.compose.ui.unit.sp
 import com.rai.listademercado.Item
 
 
-//ItemPill representa um item individual dentro de uma categoria da lista.
-// A ideia aqui é criar um componente reutilizável: sempre que quisermos
-// mostrar um item do carrinho, usamos esse composable.
-
-
 @Composable
 fun ItemPill(
     item: Item,
@@ -57,15 +52,15 @@ fun ItemPill(
         ) {
 
         CircleCheck(
-            checked = item.isChecked,
+            checked = item.checked,
             onToggle = onToggle,
             main = item.category.mainColor
         )
 
             Spacer(Modifier.width(10.dp))
 
-            val textColor = if (item.isChecked) Color(0xFFA9A9A9) else Color(0xFF4E4E4E)
-            val deco = if (item.isChecked) TextDecoration.LineThrough else TextDecoration.None
+            val textColor = if (item.checked) Color(0xFFA9A9A9) else Color(0xFF4E4E4E)
+            val deco = if (item.checked) TextDecoration.LineThrough else TextDecoration.None
 
             Text(
                 text = "${item.quantityText} ${item.name}",

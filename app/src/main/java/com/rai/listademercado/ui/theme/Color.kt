@@ -46,6 +46,13 @@ val PurpleHighLight = Color(0xFFF9E7FF)
 
 val PurpleSecondary = Color(0xFFE6CCFF)
 
+val GraySecondary: Color = Color(0xFFA9A9A9)
+
+val LightBluePrimary: Color = Color(0xFFB5C8D2)
+
+val LightBlueSecondary: Color = Color(0xFFE9F3F8)
+
+val LightBlueHighlight: Color = Color(0xFFF8FAFC)
 
 
 

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,91 +27,117 @@ import com.rai.listademercado.ui.theme.BrownPrimary
 import com.rai.listademercado.ui.theme.BrownSecondary
 import com.rai.listademercado.ui.theme.GreenPrimary
 
+// ProgressCard é o card que mostra o andamento da lista de compras.
+//
+// Ele recebe 3 informações prontas:
+// - progress: valor da barra de progresso (de 0f até 1f)
+// - checked: quantos itens já foram marcados
+// - total: quantidade total de itens
+//
+// Ou seja, esse componente não calcula nada sozinho. Ele apenas recebe os dados e mostra isso visualmente na tela.
 @Composable
 fun ProgressCard(
-    checkedItems: Int,
-    totalItems: Int,
     progress: Float,
+    checked: Int,
+    total: Int,
     modifier: Modifier = Modifier
 ) {
-//Semelhante a um quadro em branco ou uma box
+    // Define o arredondamento das bordas do card
+    val shape = RoundedCornerShape(25.dp)
+
     Surface(
+        shape = shape,
         color = BrownHighLight,
         modifier = modifier
             .fillMaxWidth()
-            .border(1.dp, BrownHighLight)
+            .border(1.dp, BrownHighLight, shape)
     ) {
-        Column(modifier = Modifier.padding(20.dp)) {
-            Text(
-                "Progresso do carrinho",
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
-            )
+        // Column organiza os elementos um embaixo do outro:
+        // título, subtítulo, contador e barra de progresso.
+        Column(Modifier.padding(16.dp)) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+                Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    "Quase lá, ein?!",
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = BrownPrimary
-                )
-                // arredondamento nas bordas
-//                RoundedCornerShape(99.dp)
+                // weight(1f) faz essa coluna ocupar todo o espaço disponível, empurrando o contador para a direita.
+                Column(Modifier.weight(1f)) {
+                    Text(
+                        text = "Progresso do Carrinho",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = BrownPrimary
+                    )
+                    Spacer(Modifier.height(6.dp))
+                    Text(
+                        text = "Quase lá ein!",
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    )
+                }
 
-                CountCapsule(text = "$checkedItems/$totalItems")
+                CountPill(text = "$checked/$total")
             }
 
             Spacer(Modifier.height(10.dp))
 
+            // A barra visualiza o progresso da lista. O valor esperado vai de 0f a 1f:
+            // 0f = 0%
+            // 1f = 100%
+            // coerceIn garante que, mesmo se algum valor vier errado, ele será limitado entre 0 e 1.
+
             LinearProgressIndicator(
-                //garante que a barra não fique negativa e nem ultrapasse 100%
-                //0f -> correnponde a 0 e 1f -> corrresponde a 100%
-                { progress.coerceIn(0f, 1f) },
-                modifier = modifier
+                progress = { progress.coerceIn(0f, 1f) },
+                modifier = Modifier
                     .fillMaxWidth()
-                    .height(18.dp)
-                    .clip(RoundedCornerShape(100.dp))
-                    .border(1.dp, color = BrownSecondary, shape = RoundedCornerShape(100.dp)),
-                color = GreenPrimary,
-                //trackColor é a cor da “trilha” ou “fundo” de componentes
-                // que possuem uma parte ativa e uma parte inativa
-                trackColor = Color.White
+                    .height(8.dp)
+                    .clip(RoundedCornerShape(999.dp)),
+                color = Color(0xFF20C05A),
+                trackColor = Color(0xFFF1E7BF)
             )
         }
     }
 }
 
+// CountPill é a pequena "pílula" que mostra a contagem de itens. Exemplo: 3/10
+//
+// Criamos esse componente separado porque ele pode ser reutilizado e deixa o código do ProgressCard mais organizado.
 @Composable
-fun CountCapsule(
+fun CountPill(
     text: String,
     modifier: Modifier = Modifier
-    ){
+) {
+    val shape = RoundedCornerShape(999.dp)
+
     Surface(
+        shape = shape,
         color = Color.White,
-        modifier = modifier
-            .padding(5.dp)
-            .clip(RoundedCornerShape(100.dp))
-            .border(2.dp, BrownSecondary, shape = RoundedCornerShape(100.dp)),
-        shape = RoundedCornerShape(size = 100.dp)
+        modifier = modifier.border(1.dp, Color(0xFFEADFAE), shape)
+            .border(1.dp, BrownSecondary, shape)
     ) {
         Text(
             text = text,
-            fontWeight = FontWeight.Bold,
-            color = BrownPrimary,
+            modifier = Modifier.padding(10.dp),
             fontSize = 14.sp,
-            modifier = Modifier.padding(10.dp)
+            fontWeight = FontWeight.SemiBold,
+            color = BrownPrimary
         )
     }
-
 }
 
-
-@Preview
+// Preview serve para visualizar esse componente no editor
+// sem precisar rodar o aplicativo inteiro.
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
 private fun ProgressCardPreview() {
-    ProgressCard(checkedItems = 2, totalItems = 5, progress = 0.6f)
+    MaterialTheme {
+        Surface(color = Color.White) {
+            ProgressCard(
+                progress = 0.65f,
+                checked = 13,
+                total = 20,
+                modifier = Modifier.padding(18.dp)
+            )
+        }
+    }
 }
