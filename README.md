@@ -1,5 +1,4 @@
-# 🛒 Lista de Mercado
-
+# 🛒 Meu Carrinho
 Aplicativo Android desenvolvido com **Kotlin** e **Jetpack Compose** para organização de listas de compras de forma simples, moderna e intuitiva.
 
 O projeto permite adicionar itens ao carrinho, organizar por categorias, controlar quantidades e acompanhar o progresso da compra em tempo real.
